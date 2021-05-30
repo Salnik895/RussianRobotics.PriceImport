@@ -4,6 +4,7 @@ using System.IO;
 
 namespace RussianRobotics.PriceImport.Csv
 {
+    /// <summary>Выполняет разбор CSV файла для <see cref="SimpleCsvReader"/>.</summary>
     public class SimpleCsvParser : IParser, IDisposable
     {
         private readonly TextReader textReader;
@@ -13,16 +14,25 @@ namespace RussianRobotics.PriceImport.Csv
         private string currentLine;
         private string[] record;
 
+        /// <summary><inheritdoc/></summary>
         public int CurrentIndex => currentIndex;
+
+        /// <summary><inheritdoc/></summary>
         public string CurrentLine => currentLine;
+
+        /// <summary><inheritdoc/></summary>
         public string[] Record => record;
 
+        /// <summary>Инициализирует новый экземпляр класса <see cref="SimpleCsvParser"/>.</summary>
+        /// <param name="textReader">Экземпляр <see cref="TextReader"/> для чтения CSV файла.</param>
+        /// <param name="leaveOpen">True если не требуется освободить ресурсы <see cref="TextReader"/>, иначе false.</param>
         public SimpleCsvParser(TextReader textReader, bool leaveOpen = true)
         {
             this.textReader = textReader;
             this.leaveOpen = leaveOpen;
         }
 
+        /// <summary>Выполняет чтнение и разбор записи.</summary>
         public bool Read()
         {
             currentLine = textReader.ReadLine();
@@ -101,6 +111,7 @@ namespace RussianRobotics.PriceImport.Csv
             }
         }
 
+        /// <summary><inheritdoc/></summary>
         public void Dispose()
         {
             Dispose(disposing: true);

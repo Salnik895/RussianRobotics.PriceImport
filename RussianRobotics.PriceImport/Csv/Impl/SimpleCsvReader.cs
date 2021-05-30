@@ -4,6 +4,7 @@ using System.IO;
 
 namespace RussianRobotics.PriceImport.Csv
 {
+    /// <summary>Предоставляет данные для чтения CSV файла посредством <see cref="IParser"/>.</summary>
     public class SimpleCsvReader : IRowReader, IDisposable
     {
         private readonly IParser parser;
@@ -11,21 +12,30 @@ namespace RussianRobotics.PriceImport.Csv
         private readonly Dictionary<string, int> namedIndexes = new Dictionary<string, int>();
         private bool disposed;        
         private string[] header;
-        
+
+        /// <summary><inheritdoc/></summary>
         public string[] Header => header;
 
+        /// <summary>Инициализирует новый экземпляр класса <see cref="SimpleCsvReader"/>.</summary>
+        /// <param name="parser">Экземпляр <see cref="IParser"/> для разбора CSV файла.</param>
+        /// <param name="badDataHandler">Функция обработки ошибок данных. Если равна null, то будет сгенерировано исключение <see cref="CsvDataException"/>.</param>
         public SimpleCsvReader(IParser parser, Action<string[], int> badDataHandler)
         {
             this.parser = parser;
             this.badDataHandler = badDataHandler;
         }
 
+        /// <summary>Инициализирует новый экземпляр класса <see cref="SimpleCsvReader"/></summary>
+        /// <param name="textReader">Экземпляр <see cref="TextReader"/> для чтения CSV файла.</param>
+        /// <param name="badDataHandler">Функция обработки ошибок данных. Если равна null, то будет сгенерировано исключение <see cref="CsvDataException"/>.</param>
+        /// <param name="leaveOpen">True если не требуется освободить ресурсы <see cref="TextReader"/>, иначе false.</param>
         public SimpleCsvReader(TextReader textReader, 
                                Action<string[], int> badDataHandler = null, 
                                bool leaveOpen = true) 
             : this(new SimpleCsvParser(textReader, leaveOpen), badDataHandler) 
         { }
 
+        /// <summary><inheritdoc/></summary>
         public string GetField(int index)
         {
             if (index < parser.Record.Length)
@@ -34,6 +44,7 @@ namespace RussianRobotics.PriceImport.Csv
                 throw new IndexOutOfRangeException($"Столбец '{index}' не найден");
         }
 
+        /// <summary><inheritdoc/></summary>
         public string GetField(string name)
         {
             if (namedIndexes == null)
@@ -45,8 +56,10 @@ namespace RussianRobotics.PriceImport.Csv
                 throw new KeyNotFoundException($"Столбец '{name}' не найден");
         }
 
+        /// <summary><inheritdoc/></summary>
         public string[] GetRecord() => parser.Record;
 
+        /// <summary><inheritdoc/></summary>
         public bool Read()
         {
             bool flag = parser.Read();
@@ -63,6 +76,7 @@ namespace RussianRobotics.PriceImport.Csv
             return flag;
         }
 
+        /// <summary><inheritdoc/></summary>
         public bool ReadHeader()
         {
             if (parser.CurrentIndex == -1)
@@ -79,6 +93,7 @@ namespace RussianRobotics.PriceImport.Csv
             return false;
         }
 
+        /// <summary><inheritdoc/></summary>
         public void Dispose()
         {
             Dispose(disposing: true);

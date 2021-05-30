@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace RussianRobotics.PriceImport.Logic
 {
+    /// <summary>Выполняет обработку данных прикрепленных файлов в письмах посредством <see cref="IReceiver"/>.</summary>
     public class MailAttachmentHandler : IAttachmentHandler
     {
         private readonly IReceiver receiver;
@@ -21,20 +22,26 @@ namespace RussianRobotics.PriceImport.Logic
         private bool useSsl;
         private CultureInfo culture;
         private string[] fileExtensions;
-        
+
+        /// <summary>Инициализирует новый экземпляр класса <see cref="SimpleCsvReader"/>.</summary>
+        /// <param name="receiver">Экземпляр <see cref="IReceiver"/> для получения писем и прикрепленных файлов.</param>
         public MailAttachmentHandler(IReceiver receiver) => this.receiver = receiver;
 
+        /// <summary>Инициализирует новый экземпляр класса <see cref="SimpleCsvReader"/>.</summary>
         public MailAttachmentHandler() : this(new MailReceiver()) { }
 
+        /// <summary><inheritdoc/></summary>
         public void Connect(string userName, string password)
             => receiver.Connect(userName, password, host, port, useSsl);
 
+        /// <summary><inheritdoc/></summary>
         public void HandleAttachments()
         {
             foreach (string from in fieldBindingsRegistry.Keys)
                 HandleAttachments(from);
         }
 
+        /// <summary><inheritdoc/></summary>
         public void HandleAttachments(string from)
         {
             using (var dbContext = new SparePartsContext(connectionString))
@@ -66,6 +73,7 @@ namespace RussianRobotics.PriceImport.Logic
             }
         }
 
+        /// <summary><inheritdoc/></summary>
         public void Initialize(IConfiguration config)
         {
             connectionString = config.GetSection("ConnectionString").Value;
@@ -97,6 +105,7 @@ namespace RussianRobotics.PriceImport.Logic
             }
         }
 
+        /// <summary><inheritdoc/></summary>
         public void Dispose()
         {
             Dispose(disposing: true);

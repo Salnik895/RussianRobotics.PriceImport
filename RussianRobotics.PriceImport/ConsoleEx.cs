@@ -2,8 +2,12 @@
 
 namespace RussianRobotics.PriceImport
 {
+    /// <summary>Предоставляет статические методы расширяющие функционал консоли.</summary>
     public static class ConsoleEx
     {
+
+        /// <summary>Выполняет чтение строки (пароля) с маскировкой отображаемых символов.</summary>
+        /// <returns></returns>
         public static string ReadPassword()
         {
             string password = string.Empty;
