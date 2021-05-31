@@ -1,6 +1,6 @@
 ﻿namespace RussianRobotics.PriceImport.Model
 {
-    /// <summary>Запись прайс-листа. </summary>
+    /// <summary>Запись прайс-листа.</summary>
     public class PriceItem
     {
         /// <summary>Идентификатор.</summary>
@@ -9,7 +9,7 @@
         /// <summary>Бренд.</summary>
         public string Vendor { get; set; }
 
-        /// <summary>Номер. </summary>
+        /// <summary>Номер.</summary>
         public string Number { get; set; }
 
         public string SearchVendor { get; set; }
