@@ -15,16 +15,16 @@ namespace RussianRobotics.PriceImport.Logic
         private readonly bool leaveOpen;
         private bool disposed;
 
-        /// <summary>Инициализирует новый экземпляр класс <see cref="MailReceiver"/>.</summary>
+        /// <summary>Инициализирует новый экземпляр класса <see cref="MailReceiver"/>.</summary>
         /// <param name="imapClient">Интерфейс для работы с IMAP.</param>
-        /// <param name="leaveOpen">>True если не требуется освободить ресурсы <see cref="IImapClient"/>, иначе false.</param>
+        /// <param name="leaveOpen">True если не требуется освободить ресурсы <see cref="IImapClient"/>, иначе false.</param>
         public MailReceiver(IImapClient imapClient, bool leaveOpen = true)
         {
             this.imapClient = imapClient;
             this.leaveOpen = leaveOpen;
         }
 
-        /// <summary>Инициализирует новый экземпляр класс <see cref="MailReceiver"/>.</summary>
+        /// <summary>Инициализирует новый экземпляр класса <see cref="MailReceiver"/>.</summary>
         public MailReceiver() : this(new ImapClient(), false) { }
 
         /// <summary><inheritdoc/></summary>
