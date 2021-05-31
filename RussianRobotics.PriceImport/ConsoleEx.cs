@@ -7,7 +7,6 @@ namespace RussianRobotics.PriceImport
     {
 
         /// <summary>Выполняет чтение строки (пароля) с маскировкой отображаемых символов.</summary>
-        /// <returns></returns>
         public static string ReadPassword()
         {
             string password = string.Empty;
