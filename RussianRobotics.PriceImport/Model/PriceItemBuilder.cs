@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace RussianRobotics.PriceImport.Model
 {
-    /// <summary>Выполяет построение записи прайс-листа <see cref="PriceItem"/>.</summary>
+    /// <summary>Выполняет построение записи прайс-листа <see cref="PriceItem"/>.</summary>
     public class PriceItemBuilder
     {
         private static readonly Regex countRegex = new Regex(@"[0-9]+", RegexOptions.Compiled);
